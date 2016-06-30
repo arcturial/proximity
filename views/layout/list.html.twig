@@ -1,0 +1,67 @@
+{% set active_page = 'beacons' %}
+
+{% extends "layout/main.html.twig" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Heading</div>
+            <div class="panel-body">
+                <a href="{{ relative_url('beacons/add') }}" class="btn btn-primary">Register Beacon</a>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>UUID</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for beacon in beacons %}
+                        <tr>
+                            <td>{{ beacon.id }}</td>
+                            <td>{{ beacon.name }}</td>
+                            <td>{{ beacon.uuid }}</td>
+                            <td>{{ beacon.getTypeLabel() }}</td>
+                        </tr>
+                    {% else %}
+                        <tr><td colspan="3">No items found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <div class="panel-footer text-center">
+                {% if beacons.isPaginated() %}
+                    <nav>
+                        <ul class="pagination">
+                        {% if beacons.hasPrevious() %}
+                            <li>
+                                <a href="?page={{ beacons.previousPageNumber() }}">Previous</a>
+                            </li>
+                        {% endif %}
+
+                            {% for i in range(0, beacons.getPages() - 1) %}
+                                <li {% if i == beacons.getPage() %}class="active"{% endif %}>
+                                    <a href="?page={{ i }}">{{ i + 1 }}</a>
+                                </li>
+
+                            {% endfor %}
+
+                        {% if beacons.hasNext() %}
+                            <li>
+                                <span><a href="?page={{ beacons.nextPageNumber() }}">Next</a></span>
+                            </li>
+                        {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

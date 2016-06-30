@@ -1,0 +1,44 @@
+{% set active_page = 'beacons' %}
+
+{% extends "layout/main.html.twig" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Register Beacon</div>
+
+            <form method="post">
+
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label for="beacon[type]" class="control-label">Type</label>
+                    <select class="form-control" name='beacon[type]'>
+                        <option value='0'>Eddystone</option>
+                        <option value='1'>iBeacon</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="beacon[name]" class="control-label">Name</label>
+                    <input type="text" class="form-control" name='beacon[name]'>
+                </div>
+
+                <div class="form-group">
+                    <label for="beacon[uuid]" class="control-label">UUID</label>
+                    <input type="text" class="form-control" name='beacon[uuid]'>
+                </div>
+
+            </div>
+
+            <div class="panel-footer text-right">
+                <button type="submit" class="btn btn-default">Register Beacon</button>
+            </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout/main.html.twig" %}
+
+{% block topnav %}{% endblock %}
+{% block leftnav %}{% endblock %}
+
+{% block body %}
+
+<div class="login">
+
+    <h1>
+        Login to your account
+    </h1>
+
+    {{ form_start() }}
+
+        {{ form_text({ 'right-addon': '.00', 'placeholder': 'Email' }) }}
+
+        {{ form_password({ 'right-addon': '.00', 'placeholder': 'Password' }) }}
+
+        {{ form_submit([]) }}
+
+    {{ form_end() }}
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+@import 'variables';
+@import 'mixins';
+
+.btn
+{
+    font-size: 13px;
+    line-height: 20px;
+
+    &.btn-primary
+    {
+        background-color: @btn-primary-bg;
+        .border-radius(4px);
+        border-color: @btn-primary-bg;
+    }
+}

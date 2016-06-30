@@ -1,0 +1,59 @@
+@import 'variables';
+
+@highlight-bg-color: rgba(0, 0, 0, 0.15);
+
+header.topnav
+{
+    position: relative;
+    z-index: 999;
+    max-height: @topnav-height;
+
+    .navbar
+    {
+        position: relative;
+        z-index: 999;
+
+        background-color: @topnav-bg;
+        border: none;
+        margin-bottom: 0px;
+
+        .navbar-header
+        {
+            .navbar-brand
+            {
+                width: 230px;
+                background-color: @highlight-bg-color;
+                color: @topnav-color;
+            }
+        }
+
+        ul.navbar-nav
+        {
+            > li
+            {
+                > a
+                {
+                    color: @topnav-color;
+
+                    &.active,
+                    &:hover,
+                    &:focus,
+                    &:active
+                    {
+                        background-color: @highlight-bg-color !important;
+                    }
+                }
+
+                &.open
+                {
+                    background-color: transparent;
+
+                    > a
+                    {
+                        background-color: @highlight-bg-color !important;
+                    }
+                }
+            }
+        }
+    }
+}
