@@ -1,6 +1,6 @@
 <header class="topnav">
     <nav class="navbar navbar-static-top">
-        <div class="container-fluid">
+        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -15,10 +15,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#"><i class="fa fa-fw fa-bars"></i></a></li>
+                    <li {% if active_page == 'dashboard' %}class="active"{% endif %}">
+                        <a href="{{ relative_url('/') }}"><i class="fa fa-fw fa-bars"></i> Dashboard</a>
+                    </li>
+                    <li {% if active_page == 'beacons' %}class="active"{% endif %}">
+                        <a href="{{ relative_url('beacons') }}"><i class="fa fa-fw fa-bars"></i> Beacons</a>
+                    </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ relative_url('account/overview') }}"><i class="fa fa-fw fa-lg fa-cog"></i></a></li>
+                    <li><a href="{{ relative_url('auth/logout') }}"><i class="fa fa-fw fa-lg fa-sign-out"></i></a></li>
+
+                    {#
                     <li class="dropdown">
                         <a
                             href="#"
@@ -31,13 +40,12 @@
                             Chris Brand
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="{{ relative_url('account/logout') }}"><i class="fa fa-fw fa-cog"></i> Account</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href=""><i class="fa fa-fw fa-sign-out"></i> Sign Out</a></li>
+                            <li><a href="{{ relative_url('auth/logout') }}"><i class="fa fa-fw fa-sign-out"></i> Sign Out</a></li>
                         </ul>
                     </li>
+                    #}
                 </ul>
             </div>
         </div>

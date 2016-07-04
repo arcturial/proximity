@@ -13,7 +13,7 @@ class Route extends BaseRoute
             if ($user = $request->getSession()->get('user')) {
                 $app['twig']->addGlobal('user', $user);
             } else {
-                $app->log('Access token invalid, page requires user authentication.');
+                //$app->log('Access token invalid, page requires user authentication.');
                 return $app->redirect('/login');
             }
         });

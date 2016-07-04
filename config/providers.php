@@ -93,12 +93,14 @@ $app->extend('twig', function($twig, $app) {
             </div>';
     }, $safe));
 
-    $twig->addFunction(new \Twig_SimpleFunction('form_submit', function ($label) use ($app) {
+    $twig->addFunction(new \Twig_SimpleFunction('form_submit', function ($attr) use ($app, $merge) {
+
+        $attr = $merge(['label' => 'Submit'], $attr);
 
         return '
             <div class="form-group text-right">
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block">' . $label . '</button>
+                    <button type="submit" class="btn btn-primary btn-block">' . $attr['label'] . '</button>
                 </div>
             </div>';
     }, $safe));

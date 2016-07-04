@@ -21,9 +21,7 @@
 }
 
 .sidebar {
-  background-color: #222d32;
-  width: 230px;
-  position: absolute;
+  background-color: #ffffff;
   top: 0px;
   left: 0px;
   z-index: 810;
@@ -32,7 +30,7 @@
 }
 .sidebar .heading {
   color: #4b646f;
-  background: #1a2226;
+  background: #ffffff;
 }
 .sidebar ul {
   list-style: none;
@@ -51,14 +49,14 @@
 }
 .sidebar ul li a {
   border-left: 3px solid transparent;
-  color: #b8c7ce;
+  color: #cccccc;
   text-decoration: none;
 }
 .sidebar ul li.active a,
 .sidebar ul li:hover a {
   border-left-color: #605ca8;
-  background-color: #1a2226;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #cccccc;
 }
 
 div.login {
@@ -88,7 +86,7 @@ body {
   background-color: #ecf0f5;
 }
 .content {
-  margin-left: 230px;
+  margin-top: 30px;
 }
 h1 {
   font-size: 24px;
@@ -101,6 +99,9 @@ header.topnav {
   position: relative;
   z-index: 999;
   max-height: 100px;
+}
+header.topnav .navbar-brand {
+  margin-left: 0px !important;
 }
 header.topnav .navbar {
   position: relative;

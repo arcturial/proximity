@@ -11,3 +11,6 @@ $app->get('/beacons', 'App\Controller\BeaconController::indexAction')
 $app->match('/beacons/add', 'App\Controller\BeaconController::addAction')
     ->method('POST|GET')
     ->secure();
+
+$app->get('/account/overview', 'App\Controller\AccountController::overviewAction')
+    ->secure();
