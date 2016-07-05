@@ -22,6 +22,20 @@ class AccountController
 	{
         $user = $this->getAuth($app)->authenticatedUser();
 
-		return $app->render('account/overview.html.twig', []);
+        $form = $app->form($user)
+            ->add('email', \Symfony\Component\Form\Extension\Core\Type\TextType::class, ['label' => 'Email'])
+            ->add('password', \Symfony\Component\Form\Extension\Core\Type\PasswordType::class, ['label' => 'Password'])
+            ->add('name', \Symfony\Component\Form\Extension\Core\Type\TextType::class, ['label' => 'Name'])
+            ->add('save', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, ['label' => 'Update'])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            var_dump($user);
+            die();
+        }
+
+		return $app->render('account/overview.html.twig', [ 'form' => $form->createView() ]);
 	}
 }

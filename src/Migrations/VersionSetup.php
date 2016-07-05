@@ -1,20 +1,32 @@
 <?php
-
 namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Creates the user table schema
  */
-class Version20160619165846 extends AbstractMigration
+class VersionSetup extends AbstractMigration
 {
     /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
     {
+        $table = $schema->createTable('users');
+        $table->addOption('engine', 'InnoDB');
+
+        $table->addColumn('id', 'integer', ['autoincrement' => true]);
+        $table->addColumn('email', 'string', ['notnull' => true, 'length' => 255]);
+        $table->addColumn('password', 'string', ['notnull' => true, 'length' => 255]);
+        $table->addColumn('fname', 'string', ['notnull' => true, 'length' => 255]);
+        $table->addColumn('sname', 'string', ['notnull' => true, 'length' => 255]);
+
+        $table->setPrimaryKey(['id']);
+
+
+
         $table = $schema->createTable('beacons');
         $table->addOption('engine', 'InnoDB');
 
@@ -32,6 +44,7 @@ class Version20160619165846 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
+        $schema->dropTable('users');
         $schema->dropTable('beacons');
     }
 }

@@ -18,7 +18,11 @@ abstract class Entity implements \ArrayAccess
 
     public function offsetGet($offset)
     {
-        return $this->properties[$offset];
+        if (method_exists($this, 'get' . $offset)) {
+            return call_user_func(array($this, 'get' . $offset));
+        } else {
+            return $this->properties[$offset];
+        }
     }
 
     public function offsetSet($offset, $value)
@@ -33,12 +37,12 @@ abstract class Entity implements \ArrayAccess
 
     public function __set($key, $value)
     {
-        $this->properties[$key] = $value;
+        $this[$key] = $value;
     }
 
     public function __get($key)
     {
-        return $this->properties[$key];
+        return $this[$key];
     }
 
     public function getProperties()

@@ -3,10 +3,12 @@ namespace App;
 
 use Silex\Application as BaseApplication;
 use Silex\Application\TwigTrait;
+use Silex\Application\FormTrait;
 
 class Application extends BaseApplication
 {
     use TwigTrait;
+    use FormTrait;
 
     public function success($message)
     {

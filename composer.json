@@ -8,11 +8,14 @@
         "doctrine/migrations": "*",
         "symfony/twig-bridge": "*",
         "symfony/security-csrf": "*",
-        "symfony/console": "*"
+        "symfony/console": "*",
+        "symfony/form": "*"
     },
     "autoload": {
         "psr-4": {
-        	"App\\": ["src"]
+        	"App\\": ["src"],
+            "Arcturial\\FormBuilder\\": ["src/FormBuilder"]
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

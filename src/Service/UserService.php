@@ -25,6 +25,7 @@ class UserService
 
         $statement->setFetchMode(PDO::FETCH_CLASS, 'App\Entity\User');
 
+        return new \App\Entity\User;
         return $statement->fetch();
     }
 

@@ -1,51 +1,29 @@
 <?php
 namespace App\Entity;
 
-class User implements \ArrayAccess
+class User extends Entity
 {
     protected $properties = [
+        'id'        => null,
+        'email'     => 'test@test.com',
+        'password'  => null,
+        'fname'     => 'Chris',
+        'sname'     => 'Brand'
     ];
-
-    public function offsetExists($offset)
-    {
-        return isset($this->properties[$offset]);
-    }
-
-    public function offsetGet($offset)
-    {
-        return $this->properties[$offset];
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        $this->properties[$offset] = $value;
-    }
-
-    public function offsetUnset($offset)
-    {
-        unset($this->properties[$offset]);
-    }
-
-    public function __set($key, $value)
-    {
-        $this->properties[$key] = $value;
-    }
-
-    public function __get($key)
-    {
-        return $this->properties[$key];
-    }
 
     public function verifyPassword($password)
     {
+        return true;
         return password_verify($password, $this->properties['password']);
     }
 
-    public function getProperties()
+    public function getName()
     {
-        return [
-            'email' => 'test@test.com',
-            'password' => password_hash('test', PASSWORD_BCRYPT)
-        ];
+        return $this->properties['fname'] . ' ' . $this->properties['sname'];
+    }
+
+    public function getPassword()
+    {
+        return password_hash('test', PASSWORD_BCRYPT);
     }
 }

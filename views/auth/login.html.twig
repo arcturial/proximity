@@ -11,15 +11,8 @@
         Login to your account
     </h1>
 
-    {{ form_start() }}
+    {{ form(form) }}
 
-        {{ form_text({ 'right-addon': '.00', 'placeholder': 'Email' }) }}
-
-        {{ form_password({ 'right-addon': '.00', 'placeholder': 'Password' }) }}
-
-        {{ form_submit([]) }}
-
-    {{ form_end() }}
 </div>
 
 {% endblock %}

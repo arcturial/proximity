@@ -8,23 +8,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">Account</div>
 
-            {{ form_start() }}
-
             <div class="panel-body">
-
-                {{ form_text({ 'placeholder': 'Email' }) }}
-
-                {{ form_password({ 'placeholder': 'Password' }) }}
-
-                {{ form_text({ 'placeholder': 'Nane' }) }}
-
+            {# TODO: create custom panel form template #}
+            {% form_theme form "bootstrap_3_layout.html.twig" %}
+            {{ form(form) }}
             </div>
-
-            <div class="panel-footer text-right">
-                {{ form_submit([]) }}
-            </div>
-
-            {{ form_end() }}
 
         </div>
     </div>
