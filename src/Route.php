@@ -14,7 +14,7 @@ class Route extends BaseRoute
                 $app['twig']->addGlobal('user', $user);
             } else {
                 //$app->log('Access token invalid, page requires user authentication.');
-                return $app->redirect('/login');
+                return $app->redirect('/auth/login');
             }
         });
 
