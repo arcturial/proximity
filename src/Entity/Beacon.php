@@ -3,21 +3,47 @@ namespace App\Entity;
 
 class Beacon extends Entity
 {
-    const TYPES = [
-        0   => 'Eddystone',
-        1   => 'iBeacon'
-    ];
+    private static $google = null;
 
     protected $properties = [
-        'id'        => null,
-        'user_id'   => null,
-        'name'      => null,
-        'type'      => 0,
-        'uuid'      => null
+        'name'              => null,
+        'user_id'           => null,
+        'namespace'         => null,
+        'instanceId'        => null,
+        'advertiserId'      => null,
+        'advertiserType'    => null,
+        'status'            => null
     ];
 
-    public function getTypeLabel()
+    private $googleData = [];
+
+    public function getBeaconId()
     {
-        return static::TYPES[$this['type']];
+        return $this->properties['namespace'] . $this->properties['instanceId'];
+    }
+
+    public function getAdvertiserId()
+    {
+        return base64_encode(pack("H*", $this->getBeaconId()));
+    }
+
+    private function syncGoogle()
+    {
+        $prox = new \Google_Service_ProximityBeacon(static::$google);
+
+        $data = $prox->beacons->get('beacons/3!' . $this->name);
+
+        $this->googleData = $data;
+    }
+
+    public function getStatus()
+    {
+        $this->syncGoogle();
+        return $this->googleData['status'];
+    }
+
+    public static function setGoogle($google)
+    {
+        static::$google = $google;
     }
 }

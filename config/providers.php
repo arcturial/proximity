@@ -7,12 +7,8 @@ use Silex\Provider\FormServiceProvider;
 
 $app->register(new TwigServiceProvider, array(
     'twig.path' => __DIR__ . '/../views',
-    'twig.form.templates' => ['bootstrap_3_layout.html.twig'],
     'debug'     => true
 ));
-
-
-$app->register(new FormServiceProvider());
 
 
 $app->register(new SessionServiceProvider);
@@ -40,3 +36,16 @@ $app->extend('twig', function($twig, $app) {
 
     return $twig;
 });
+
+putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/../account.json');
+
+$httpClient = new GuzzleHttp\Client([
+    'verify' => false, // otherwise HTTPS requests will fail.
+]);
+
+$client = new Google_Client();
+$client->setHttpClient($httpClient);
+$client->useApplicationDefaultCredentials();
+$client->addScope(Google_Service_ProximityBeacon::USERLOCATION_BEACON_REGISTRY);
+
+$app['google'] = $client;

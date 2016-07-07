@@ -4,7 +4,7 @@ namespace App\Entity;
 class User extends Entity
 {
     protected $properties = [
-        'id'        => null,
+        'id'        => 1,
         'email'     => 'test@test.com',
         'password'  => null,
         'fname'     => 'Chris',

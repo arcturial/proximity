@@ -30,13 +30,10 @@ class VersionSetup extends AbstractMigration
         $table = $schema->createTable('beacons');
         $table->addOption('engine', 'InnoDB');
 
-        $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('user_id', 'integer', ['notnull' => true]);
         $table->addColumn('name', 'string', ['notnull' => true, 'length' => 255]);
-        $table->addColumn('type', 'integer', ['notnull' => true]);
-        $table->addColumn('uuid', 'string', ['notnull' => true, 'length' => 255]);
+        $table->addColumn('user_id', 'integer', ['notnull' => true]);
 
-        $table->setPrimaryKey(['id']);
+        $table->setPrimaryKey(['name']);
     }
 
     /**

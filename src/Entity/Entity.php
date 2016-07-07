@@ -11,6 +11,10 @@ abstract class Entity implements \ArrayAccess
         $this->properties = array_merge($this->properties, $properties);
     }
 
+    public function prepareData()
+    {
+    }
+
     public function offsetExists($offset)
     {
         return isset($this->properties[$offset]);

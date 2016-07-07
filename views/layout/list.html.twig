@@ -14,18 +14,16 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>UUID</th>
-                        <th>Type</th>
+                        <th>User</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for beacon in beacons %}
                         <tr>
-                            <td>{{ beacon.id }}</td>
                             <td>{{ beacon.name }}</td>
-                            <td>{{ beacon.uuid }}</td>
-                            <td>{{ beacon.getTypeLabel() }}</td>
+                            <td>{{ beacon.user_id }}</td>
+                            <td>{{ beacon.status }}</td>
                         </tr>
                     {% else %}
                         <tr><td colspan="3">No items found.</td></tr>

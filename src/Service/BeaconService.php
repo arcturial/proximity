@@ -31,7 +31,7 @@ class BeaconService
 
         // Total rows
         $rows = $query
-            ->select('COUNT(DISTINCT id) AS rows')
+            ->select('COUNT(DISTINCT name) AS rows')
             ->setFirstResult(null)
             ->setMaxResults(null)
             ->execute()
@@ -42,6 +42,16 @@ class BeaconService
 
     public function create(\App\Entity\Beacon $user)
     {
-        return $this->persister->create($this->connection, 'beacons', $user);
+        $statement = $this->connection
+            ->createQueryBuilder()
+            ->insert('beacons');
+
+        $statement->setValue('name', '?');
+        $statement->setValue('user_id', '?');
+
+        $statement->setParameter(0, $user->getBeaconId());
+        $statement->setParameter(1, $user['user_id']);
+
+        return $statement->execute();
     }
 }
