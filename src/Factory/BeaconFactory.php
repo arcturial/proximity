@@ -3,15 +3,15 @@ namespace App\Factory;
 
 class BeaconFactory
 {
-    public static function createEddystone($data)
-    {
-        return new \App\Entity\Beacon($data);
-    }
+    const TYPE_MAP = [
+        0 => 'App\Entity\EddystoneBeacon'
+    ];
 
     public static function create($data)
     {
-        $type = isset($data['type']) ? $data['type'] : 'EDDYSTONE';
+        $type = isset($data['type']) ? $data['type'] : 0;
+        $typeClass = static::TYPE_MAP[$type];
 
-        return call_user_func_array(array($this, 'create' . $type) [$data]);
+        return new $typeClass($data);
     }
 }

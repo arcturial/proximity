@@ -25,12 +25,11 @@ class BeaconController
 
 	public function indexAction(Application $app, Request $request)
 	{
-        \App\Entity\Beacon::setGoogle($app['google']);
-
-
         $user = $this->getAuth($app)->authenticatedUser();
 
-        $beacons = $this->getBeaconService($app)->fetchBeaconsByUserId($user['id'], new \App\Paging($request->get('page'), $request->get('offset')));
+        $beacons = $this
+            ->getBeaconService($app)
+            ->fetchBeaconsByUserId($user->id, new \App\Paging($request->get('page'), $request->get('offset')));
 
 		return $app->render('beacons/list.html.twig', [
             'beacons' => $beacons
@@ -41,8 +40,10 @@ class BeaconController
     {
         if ($data = $request->get('beacon')) {
 
-            $beacon = new \App\Entity\Beacon($data);
+            $beacon = \App\Factory\BeaconFactory::create($data);
 
+
+            /*
 
             // Register with google
             $prox = new \Google_Service_ProximityBeacon($app['google']);
@@ -67,17 +68,15 @@ class BeaconController
                 var_dump('register');
             }
             var_dump($return);
-            /*
             try {
                 $prox->beacons->register($apiBeacon);
             } catch (\Google_Service_Exception $e) {
                 var_dump($e->getErrors());
             }
             */
-            die();
 
 
-            $beacon['user_id'] = $this->getAuth($app)->authenticatedUser()['id'];
+            $beacon->user_id = $this->getAuth($app)->authenticatedUser()->id;
 
             if ($this->getBeaconService($app)->create($beacon)) {
 

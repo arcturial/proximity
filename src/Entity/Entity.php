@@ -1,56 +1,28 @@
 <?php
 namespace App\Entity;
 
-abstract class Entity implements \ArrayAccess
+abstract class Entity
 {
-    protected $properties = [
-    ];
+    protected $fields = null;
+    private $values = null;
 
-    public function __construct($properties = [])
+    public function __construct(array $values = [])
     {
-        $this->properties = array_merge($this->properties, $properties);
-    }
-
-    public function prepareData()
-    {
-    }
-
-    public function offsetExists($offset)
-    {
-        return isset($this->properties[$offset]);
-    }
-
-    public function offsetGet($offset)
-    {
-        if (method_exists($this, 'get' . $offset)) {
-            return call_user_func(array($this, 'get' . $offset));
-        } else {
-            return $this->properties[$offset];
-        }
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        $this->properties[$offset] = $value;
-    }
-
-    public function offsetUnset($offset)
-    {
-        unset($this->properties[$offset]);
+        $this->values = new EntityFields($this->fields, $values);
     }
 
     public function __set($key, $value)
     {
-        $this[$key] = $value;
+        $this->values->$key = $value;
     }
 
     public function __get($key)
     {
-        return $this[$key];
+        return $this->values->$key;
     }
 
-    public function getProperties()
+    public function getValues()
     {
-        return $this->properties;
+        return $this->values->fetch();
     }
 }

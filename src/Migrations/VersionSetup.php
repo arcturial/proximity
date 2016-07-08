@@ -17,11 +17,11 @@ class VersionSetup extends AbstractMigration
         $table = $schema->createTable('users');
         $table->addOption('engine', 'InnoDB');
 
-        $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('email', 'string', ['notnull' => true, 'length' => 255]);
-        $table->addColumn('password', 'string', ['notnull' => true, 'length' => 255]);
-        $table->addColumn('fname', 'string', ['notnull' => true, 'length' => 255]);
-        $table->addColumn('sname', 'string', ['notnull' => true, 'length' => 255]);
+        $table->addColumn('id', 'integer', [ 'autoincrement' => true ]);
+        $table->addColumn('email', 'string', [ 'notnull' => true, 'length' => 255 ]);
+        $table->addColumn('password', 'string', [ 'notnull' => true, 'length' => 255 ]);
+        $table->addColumn('fname', 'string', [ 'notnull' => true, 'length' => 255 ]);
+        $table->addColumn('sname', 'string', [ 'notnull' => true, 'length' => 255 ]);
 
         $table->setPrimaryKey(['id']);
 
@@ -30,10 +30,13 @@ class VersionSetup extends AbstractMigration
         $table = $schema->createTable('beacons');
         $table->addOption('engine', 'InnoDB');
 
-        $table->addColumn('name', 'string', ['notnull' => true, 'length' => 255]);
-        $table->addColumn('user_id', 'integer', ['notnull' => true]);
+        $table->addColumn('id', 'string', [ 'notnull' => true, 'length' => 255 ]);
+        $table->addColumn('user_id', 'integer', [ 'notnull' => true ]);
+        $table->addColumn('type', 'integer', [ 'notnull' => true ]);
+        $table->addColumn('status', 'integer', [ 'notnull' => true ]);
+        $table->addColumn('description', 'string', [ 'notnull' => true, 'length' => 255 ]);
 
-        $table->setPrimaryKey(['name']);
+        $table->setPrimaryKey(['id']);
     }
 
     /**
